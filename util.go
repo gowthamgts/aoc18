@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"regexp"
+	"strconv"
 )
 
 // readFromInputFile reads from the file line by line
@@ -27,4 +29,19 @@ func ReadFromInputFile(path string) []string {
 	}
 
 	return lines
+}
+
+// ParseRegexForFabric is used to parse the input string
+// and return x, y, width and height positions.
+// Used for day 3 problems.
+func ParseRegexForFabric(line string) (int, int, int, int) {
+	re := regexp.MustCompile(`(?m)\s(\d+),(\d+):\s(\d+)x(\d+)`)
+
+	result := re.FindStringSubmatch(line)
+	x, _ := strconv.Atoi(result[1])
+	y, _ := strconv.Atoi(result[2])
+	width, _ := strconv.Atoi(result[3])
+	height, _ := strconv.Atoi(result[4])
+
+	return x, y, width, height
 }
