@@ -11,7 +11,7 @@ func main() {
 	lines := util.ReadFromInputFile("../input.txt")
 
 	for _, currentLine := range lines {
-		x, y, width, height := util.ParseRegexForFabric(currentLine)
+		_, x, y, width, height := util.ParseRegexForFabric(currentLine)
 		for i := x; i < x+width; i++ {
 			for j := y; j < y+height; j++ {
 				fabric[i][j]++
@@ -30,5 +30,5 @@ func main() {
 		}
 	}
 
-	fmt.Println("Claims that have less than 2:", resultingClaims)
+	fmt.Println("Claims that more than 1:", resultingClaims)
 }

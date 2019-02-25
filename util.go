@@ -32,16 +32,17 @@ func ReadFromInputFile(path string) []string {
 }
 
 // ParseRegexForFabric is used to parse the input string
-// and return x, y, width and height positions.
+// and return id and x, y, width, height positions
 // Used for day 3 problems.
-func ParseRegexForFabric(line string) (int, int, int, int) {
-	re := regexp.MustCompile(`(?m)\s(\d+),(\d+):\s(\d+)x(\d+)`)
+func ParseRegexForFabric(line string) (int, int, int, int, int) {
+	re := regexp.MustCompile(`(?m)(\d+)\s@\s(\d+),(\d+):\s(\d+)x(\d+)`)
 
 	result := re.FindStringSubmatch(line)
-	x, _ := strconv.Atoi(result[1])
-	y, _ := strconv.Atoi(result[2])
-	width, _ := strconv.Atoi(result[3])
-	height, _ := strconv.Atoi(result[4])
+	id, _ := strconv.Atoi(result[1])
+	x, _ := strconv.Atoi(result[2])
+	y, _ := strconv.Atoi(result[3])
+	width, _ := strconv.Atoi(result[4])
+	height, _ := strconv.Atoi(result[5])
 
-	return x, y, width, height
+	return id, x, y, width, height
 }
