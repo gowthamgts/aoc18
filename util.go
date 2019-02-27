@@ -46,3 +46,27 @@ func ParseRegexForFabric(line string) (int, int, int, int, int) {
 
 	return id, x, y, width, height
 }
+
+// ParseRegexForGuard is used to parse input for guard problems (4.1 and 4.2)
+func ParseRegexForGuard(line string) (year, month, day, hour, minute int, message string) {
+	re := regexp.MustCompile(`\[(\d+)-(\d+)-(\d+)\s(\d+):(\d+)\]\s(.+)`)
+
+	result := re.FindStringSubmatch(line)
+	year, _ = strconv.Atoi(result[1])
+	month, _ = strconv.Atoi(result[2])
+	day, _ = strconv.Atoi(result[3])
+	hour, _ = strconv.Atoi(result[4])
+	minute, _ = strconv.Atoi(result[5])
+
+	return year, month, day, hour, minute, result[6]
+}
+
+// GetGuardId returns the Guard Id from the string
+func ParseRegexForGuardId(message string) int {
+	re := regexp.MustCompile(`Guard\s#(\d+)`)
+
+	result := re.FindStringSubmatch(message)
+	guardId, _ := strconv.Atoi(result[1])
+
+	return guardId
+}
