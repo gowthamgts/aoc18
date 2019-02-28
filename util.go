@@ -70,3 +70,18 @@ func ParseRegexForGuardId(message string) int {
 
 	return guardId
 }
+
+// GetReducedPolymerLength reduces the polymer and returns
+// the length. Used by 5.1 and 5.2
+func GetReducedPolymerLength(line string) int {
+	for i := 0; i < len(line)-1; i++ {
+		if line[i] == line[i+1]-32 || line[i] == line[i+1]+32 {
+			// stash
+			line = line[:i] + line[i+2:]
+			i = -1
+			continue
+		}
+	}
+
+	return len(line)
+}
