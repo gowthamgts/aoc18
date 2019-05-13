@@ -85,3 +85,26 @@ func GetReducedPolymerLength(line string) int {
 
 	return len(line)
 }
+
+// ParseRegexForCoordinate will parse the input string
+// and will give (x, y) location
+func ParseRegexForCoordinate(line string) (int, int) {
+	re := regexp.MustCompile(`(\d+),\s(\d+)`)
+
+	result := re.FindStringSubmatch(line)
+	x, _ := strconv.Atoi(result[1])
+	y, _ := strconv.Atoi(result[2])
+
+	return x, y
+}
+
+func ManhattanDistance(x1, y1, x2, y2 int) int {
+	return abs(x1-x2) + abs(y1-y2)
+}
+
+func abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
